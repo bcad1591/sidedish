@@ -109,6 +109,7 @@ export const BestProducts = () => {
           </li>
         ))}
       </TabList>
+      {/*TODO: categoryList 컴포넌트를 재사용하는 방향으로 고민해볼것, + 상태를 그러면 상위에서 한꺼번에 관리해야할것 같은데 이점을 타파하자*/}
       <ProductCardList>
         {/*card 데이터 map 요소 data -> productCardData*/}
         {cardData.map(productCardData => (
