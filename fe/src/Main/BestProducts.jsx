@@ -77,6 +77,7 @@ export const BestProducts = () => {
       });
   }, [selectedTabId]);
 
+  //TODO: 상의/이부분도 외부 함수로 빼놓아서 tabList에 주입하는 방식으로 변경 고려해볼까? 그런데 만약 외부에서 핸들러가 변경된다면
   const onClickTab = event => {
     const tabId = event.target.dataset.id;
     setSelectedTabId(Number(tabId));
@@ -86,14 +87,17 @@ export const BestProducts = () => {
     <BestProductWrapper>
       <Header>
         <BadgeWrapper>
+          {/*TODO: 상의/ 뱃지 전달받기 */}
           <CategoryBadge />
         </BadgeWrapper>
 
         <Title className="fonts-display">
+          {/* 타이틀 폰트로 전달받기?? 아니면 놔두기*/}
           한번 주문하면 두번 주문하는 반찬
         </Title>
       </Header>
       <TabList>
+        {/*TODO: 상의/ 이부분도 데이터를 전달받고 이벤트를 그안에서 정의 하는방식으로??*/}
         {tabList.map(tab => (
           <li
             className={`fonts-lg ${selectedTabId === tab.id ? 'selected' : ''}`}
@@ -106,8 +110,13 @@ export const BestProducts = () => {
         ))}
       </TabList>
       <ProductCardList>
-        {cardData.map(data => (
-          <ProductCard size={''} data={data} key={data.id} />
+        {/*card 데이터 map 요소 data -> productCardData*/}
+        {cardData.map(productCardData => (
+          <ProductCard
+            size={''}
+            data={productCardData}
+            key={productCardData.id}
+          />
         ))}
       </ProductCardList>
     </BestProductWrapper>
