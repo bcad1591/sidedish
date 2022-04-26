@@ -72,7 +72,6 @@ const PolicyBadge = ({ priceData: discountPolicy }) => {
   );
 };
 
-// TODO: dataset property 지우기
 export const ProductCard = ({
   data: {
     id,
@@ -86,8 +85,9 @@ export const ProductCard = ({
   },
   size,
 }) => {
+  const productId = id;
   return (
-    <ProductCardWrapper data-id={id} size={size}>
+    <ProductCardWrapper size={size}>
       <ProductThumbnail imgUrl={image} morningDelivery={morningDelivery} />
       <Title className={Fonts.MD}>{title}</Title>
       <Description className={Fonts.SM}>{description}</Description>

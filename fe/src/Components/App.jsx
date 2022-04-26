@@ -6,7 +6,7 @@ import { fetchData } from '@/Utils';
 import { BestProducts } from '@/Components/BestProducts';
 import { CategoryProductsList } from '@/Components/CategoryProductsList';
 import { Header } from '@/Components/Header';
-import { OrderPanel } from '@/Components/OrderModal';
+import { OrderModal } from '@/Components/OrderModal';
 
 const Root = styled.div`
   width: 1440px;
@@ -39,7 +39,7 @@ const App = () => {
       <Header categoryList={categoryList} error={error} />
       <BestProducts />
       <CategoryProductsList categoryList={categoryList} />
-      <OrderPanel />
+      <OrderModal />
     </Root>
   );
 };
