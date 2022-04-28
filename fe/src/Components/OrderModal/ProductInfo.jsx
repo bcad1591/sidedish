@@ -1,7 +1,9 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 
 import { Colors, Fonts } from '@/Constants';
 
+import { ModalContext } from './ModalContext';
 import { ProductAmount } from './ProductAmount';
 
 import { DiscountBadge } from '@/Components/Badge';
