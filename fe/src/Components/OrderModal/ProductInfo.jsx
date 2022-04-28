@@ -109,9 +109,7 @@ export const ProductInfo = ({
         </ProductOrderSpec>
 
         <ProductOrderInfo>
-          <li className={Fonts.XS}>
-            {(discountPolicy ? accumulate * price : price).toLocaleString()} 원
-          </li>
+          <li className={Fonts.XS}>{accumulate.toLocaleString()} 원</li>
           <li className={Fonts.XS}>이곳은 주소입니다</li>
           <li className={Fonts.XS}>{(3000).toLocaleString()} 원</li>
         </ProductOrderInfo>
