@@ -1,5 +1,7 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
+import { API_URL } from '@/Env';
+import { fetchData } from '@/Utils';
 export const ModalContext = createContext(null);
 
 const setUpCost = (discountPolicy, discountRate, originalPrice) => {
@@ -11,28 +13,38 @@ const setUpCost = (discountPolicy, discountRate, originalPrice) => {
 
 export const ModalStore = props => {
   const [ModalDisplay, setModalDisplay] = useState(false);
-  const [productID, setProductID] = useState(1);
+  const [productID, setProductID] = useState(null);
   const [productDetail, setProductDetail] = useState(null);
   const [currentAmount, setCurrentAmount] = useState(1);
   const [totalCost, setTotalCost] = useState(null);
   const [productPrice, setProductPrice] = useState(null);
+  const [mainPanelImg, setMainPanelImg] = useState(null);
+
+  const reset = () => {
+    setProductID(null);
+    setModalDisplay(false);
+    setProductDetail(null);
+    setCurrentAmount(1);
+    setTotalCost(null);
+    setProductPrice(null);
+    setMainPanelImg(null);
+  };
 
   useEffect(() => {
     if (!productID) {
       return;
     }
-
-    fetchData(`${REACT_APP_API_URL}/items/${productID}`)
+    fetchData(`${API_URL}/items/${productID}`)
       .then(productData => {
-        console.log(productData);
-        setProductPrice(productData.price);
-        setProductDetail(productData);
-
+        const parsedProductData = productData.result_body;
+        setProductPrice(parsedProductData.price);
+        setProductDetail(parsedProductData);
+        setMainPanelImg(parsedProductData.images[0].url);
         setTotalCost(
           setUpCost(
-            productData.discountPolicy,
-            productData.discountRate,
-            productData.price
+            parsedProductData.discountPolicy,
+            parsedProductData.discountRate,
+            parsedProductData.price
           )
         );
       })
@@ -51,6 +63,9 @@ export const ModalStore = props => {
         totalCost,
         setTotalCost,
         productPrice,
+        mainPanelImg,
+        setMainPanelImg,
+        reset,
       }}
     >
       {props.children}
