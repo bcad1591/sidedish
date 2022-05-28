@@ -14,13 +14,14 @@ public class Order {
 
     @Id
     private Long id;
+    private Long memberId;
     private Long itemId;
     private int orderQuantity;
     private int totalPrice;
 
-    public Order(Item item, RequestOrderDto requestOrderDto) {
+    public Order(Item item, int orderQuantity) {
         this.itemId = item.getId();
-        this.orderQuantity = requestOrderDto.getQuantity();
+        this.orderQuantity = orderQuantity;
         this.totalPrice = calculateTotalPrice(item.getPrice(), item.getDiscountRate(), orderQuantity);
     }
 
